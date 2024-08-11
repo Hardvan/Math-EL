@@ -9,6 +9,16 @@ n_frames = 100
 snake_length = 10
 pipeline_radius = 5
 pipeline_length = 50
+snake_radius = 1.5  # Smaller radius for the snake
+
+
+def create_cylindrical_wall():
+    theta = np.linspace(0, 2 * np.pi, 100)
+    z = np.linspace(0, pipeline_length, 100)
+    THETA, Z = np.meshgrid(theta, z)
+    X = pipeline_radius * np.cos(THETA)
+    Y = pipeline_radius * np.sin(THETA)
+    return X, Y, Z
 
 
 def create_snake_frame(t):
@@ -16,8 +26,8 @@ def create_snake_frame(t):
     theta = np.linspace(0, 2 * np.pi, 100)
     z = np.linspace(0, pipeline_length, 100)
     Z, THETA = np.meshgrid(z, theta)
-    X = pipeline_radius * np.sin(THETA)
-    Y = pipeline_radius * np.cos(THETA)
+    X = snake_radius * np.sin(THETA)
+    Y = snake_radius * np.cos(THETA)
 
     # Define the snake's position
     snake_z = (t * pipeline_length / n_frames) % pipeline_length
@@ -30,10 +40,16 @@ def create_snake_frame(t):
     return X_snake, Y_snake, Z_snake
 
 
-def save_frame_as_image(frame_num, X, Y, Z, filename):
-    fig = plt.figure()
+def save_frame_as_image(frame_num, X_cyl, Y_cyl, Z_cyl, X_snake, Y_snake, Z_snake, filename):
+    fig = plt.figure(figsize=(10, 7))
     ax = fig.add_subplot(111, projection='3d')
-    ax.plot_surface(X, Y, Z, cmap='viridis')
+
+    # Plot the cylindrical wall
+    ax.plot_surface(X_cyl, Y_cyl, Z_cyl, color='lightgrey', alpha=0.5)
+
+    # Plot the snake
+    ax.plot_surface(X_snake, Y_snake, Z_snake, cmap='viridis')
+
     ax.set_xlabel('X')
     ax.set_ylabel('Y')
     ax.set_zlabel('Z')
@@ -47,9 +63,11 @@ def create_video():
     out = cv2.VideoWriter('snake_pipeline.mp4', fourcc, 10.0, (640, 480))
 
     for i in range(n_frames):
-        X, Y, Z = create_snake_frame(i)
+        X_cyl, Y_cyl, Z_cyl = create_cylindrical_wall()
+        X_snake, Y_snake, Z_snake = create_snake_frame(i)
         img_filename = f"frame_{i:03d}.png"
-        save_frame_as_image(i, X, Y, Z, img_filename)
+        save_frame_as_image(i, X_cyl, Y_cyl, Z_cyl, X_snake,
+                            Y_snake, Z_snake, img_filename)
         img = cv2.imread(img_filename)
         resized_img = cv2.resize(img, (640, 480))
         out.write(resized_img)
