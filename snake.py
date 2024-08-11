@@ -112,7 +112,7 @@ def create_video(motion_type):
     fourcc = cv2.VideoWriter_fourcc(*'mp4v')  # Use 'mp4v' for MP4 files
     out = cv2.VideoWriter(f'snake_{motion_type}.mp4', fourcc, 10.0, (640, 480))
 
-    print(f"Creating video for {motion_type}...")
+    print(f"🎥  Creating video for {motion_type}...")
     for i in range(n_frames):
         X_cyl, Y_cyl, Z_cyl = create_cylindrical_wall()
         if motion_type == 'lateral_undulation':
@@ -124,7 +124,7 @@ def create_video(motion_type):
         elif motion_type == 'sidewinding':
             X_snake, Y_snake, Z_snake = sidewinding(i)
         else:
-            raise ValueError("Invalid motion type")
+            raise ValueError("❌  Invalid motion type")
 
         img_filename = f"frame_{motion_type}_{i:03d}.png"
         save_frame_as_image(i, X_cyl, Y_cyl, Z_cyl, X_snake,
@@ -137,11 +137,11 @@ def create_video(motion_type):
         # Remove the image file after adding it to the video
         os.remove(img_filename)
 
-        # Print progress message
-        print(f"Frame {i + 1} of {motion_type} done...")
+        # Print progress message with carriage return
+        print(f"🖼️  Frame {i + 1} of {motion_type} done...", end='\r')
 
     out.release()
-    print(f"MP4 video for {motion_type} created successfully.")
+    print(f"✅  MP4 video for {motion_type} created successfully.")
 
 
 # Create videos for different types of motion
