@@ -153,5 +153,5 @@ def create_video_request_handler(n_frames, snake_length, pipeline_radius, pipeli
 
 # Example usage:
 if __name__ == '__main__':
-    output_paths = create_video_request_handler(50, 10, 5, 50, 1.5, 'videos')
+    output_paths = create_video_request_handler(50, 10, 5, 50, 1.5, '.')
     print(output_paths)
