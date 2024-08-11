@@ -5,7 +5,7 @@ import cv2
 import os
 
 # Parameters for the snake's motion in a pipeline
-n_frames = 100
+n_frames = 50
 snake_length = 10
 pipeline_radius = 5
 pipeline_length = 50
@@ -112,6 +112,7 @@ def create_video(motion_type):
     fourcc = cv2.VideoWriter_fourcc(*'mp4v')  # Use 'mp4v' for MP4 files
     out = cv2.VideoWriter(f'snake_{motion_type}.mp4', fourcc, 10.0, (640, 480))
 
+    print(f"Creating video for {motion_type}...")
     for i in range(n_frames):
         X_cyl, Y_cyl, Z_cyl = create_cylindrical_wall()
         if motion_type == 'lateral_undulation':
@@ -124,14 +125,20 @@ def create_video(motion_type):
             X_snake, Y_snake, Z_snake = sidewinding(i)
         else:
             raise ValueError("Invalid motion type")
+
         img_filename = f"frame_{motion_type}_{i:03d}.png"
         save_frame_as_image(i, X_cyl, Y_cyl, Z_cyl, X_snake,
                             Y_snake, Z_snake, img_filename)
+
         img = cv2.imread(img_filename)
         resized_img = cv2.resize(img, (640, 480))
         out.write(resized_img)
+
         # Remove the image file after adding it to the video
         os.remove(img_filename)
+
+        # Print progress message
+        print(f"Frame {i + 1} of {motion_type} done...")
 
     out.release()
     print(f"MP4 video for {motion_type} created successfully.")
