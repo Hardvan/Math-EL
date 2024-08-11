@@ -101,10 +101,10 @@ class SnakePipelineSimulator:
         plt.savefig(filename)
         plt.close()
 
-    def create_video(self, motion_type):
+    def create_video(self, motion_type, file_path):
         fourcc = cv2.VideoWriter_fourcc(*'mp4v')
-        out = cv2.VideoWriter(
-            f'snake_{motion_type}.mp4', fourcc, 10.0, (640, 480))
+        output_path = f'{file_path}/{motion_type}.mp4'
+        out = cv2.VideoWriter(output_path, fourcc, 10.0, (640, 480))
 
         print(f"🎥  Creating video for {motion_type}...")
         for i in range(self.n_frames):
@@ -134,12 +134,24 @@ class SnakePipelineSimulator:
 
         out.release()
         print(f"✅  MP4 video for {motion_type} created successfully.")
+        return output_path
+
+
+def create_video_request_handler(n_frames, snake_length, pipeline_radius, pipeline_length, snake_radius, file_path):
+    simulator = SnakePipelineSimulator(
+        n_frames, snake_length, pipeline_radius, pipeline_length, snake_radius)
+    motion_types = ['lateral_undulation',
+                    'concertina', 'rectilinear', 'sidewinding']
+
+    output_paths = {}
+    for motion_type in motion_types:
+        output_path = simulator.create_video(motion_type, file_path)
+        output_paths[motion_type] = output_path
+
+    return output_paths
 
 
 # Example usage:
 if __name__ == '__main__':
-    simulator = SnakePipelineSimulator()
-    simulator.create_video('lateral_undulation')
-    simulator.create_video('concertina')
-    simulator.create_video('rectilinear')
-    simulator.create_video('sidewinding')
+    output_paths = create_video_request_handler(50, 10, 5, 50, 1.5, 'videos')
+    print(output_paths)
