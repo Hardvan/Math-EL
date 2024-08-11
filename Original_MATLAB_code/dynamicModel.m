@@ -266,3 +266,5 @@ function [xDot] = dynamicModel(t,x,param)
     Bq  = -inv(M22)*M21;    
     xDot = [phiDot;pDot;u;Aq+Bq*u];
 end
+    
+

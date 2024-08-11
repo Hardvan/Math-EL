@@ -65,3 +65,6 @@ x0          = [qa;qu;qaDot;quDot];
 %% Solution
 
 [T,X] = ode45(@(t,y)dynamicModel(t,y,param),t,x0);
+
+
+
