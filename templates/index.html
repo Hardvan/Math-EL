@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Snake Simulation Form</title>
+  </head>
+
+  <body>
+    <h1>Enter Simulation Parameters</h1>
+    <form action="/" method="post">
+      <label for="n_frames">Number of Frames:</label>
+      <input
+        type="number"
+        id="n_frames"
+        name="n_frames"
+        value="50"
+        required
+      /><br /><br />
+
+      <label for="snake_length">Snake Length:</label>
+      <input
+        type="number"
+        step="0.1"
+        id="snake_length"
+        name="snake_length"
+        value="10.0"
+        required
+      /><br /><br />
+
+      <label for="pipeline_radius">Pipeline Radius:</label>
+      <input
+        type="number"
+        step="0.1"
+        id="pipeline_radius"
+        name="pipeline_radius"
+        value="5.0"
+        required
+      /><br /><br />
+
+      <label for="pipeline_length">Pipeline Length:</label>
+      <input
+        type="number"
+        step="0.1"
+        id="pipeline_length"
+        name="pipeline_length"
+        value="50.0"
+        required
+      /><br /><br />
+
+      <label for="snake_radius">Snake Radius:</label>
+      <input
+        type="number"
+        step="0.1"
+        id="snake_radius"
+        name="snake_radius"
+        value="1.5"
+        required
+      /><br /><br />
+
+      <input type="submit" value="Generate Videos" />
+    </form>
+  </body>
+</html>
