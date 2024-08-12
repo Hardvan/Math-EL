@@ -4,10 +4,17 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Snake Simulation Form</title>
+
+    <!-- Custom CSS -->
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/index.css') }}"
+    />
   </head>
 
   <body>
-    <h1>Enter Simulation Parameters</h1>
+    <h1 class="title">Snake Motion Visualization in a Pipeline</h1>
+    <h2>Enter Simulation Parameters</h2>
     <form action="/" method="post">
       <label for="n_frames">Number of Frames:</label>
       <input
