@@ -13,9 +13,17 @@
   </head>
 
   <body>
-    <h1>Generated Snake Videos</h1>
+    <h1 class="generated-title">Generated Snake Videos</h1>
+    <div class="description">
+      <h2>Video Descriptions</h2>
+      <p>
+        Below are the videos generated based on the parameters you provided.
+        Each video demonstrates a different type of snake motion within the
+        pipeline.
+      </p>
+    </div>
     {% for motion, video_url in video_paths.items() %}
-    <h2>{{ motion.capitalize() }}</h2>
+    <h2 class="motion">{{ motion.capitalize() }}</h2>
     <video width="640" height="480" controls>
       <source src="{{ video_url }}" type="video/mp4" />
       Your browser does not support the video tag.
