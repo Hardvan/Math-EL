@@ -64,13 +64,15 @@ class SnakePipelineSimulator:
 
         snake_z = (t * self.pipeline_length /
                    self.n_frames) % self.pipeline_length
-        amplitude = 2.0  # Amplitude of the compression/expansion
-        frequency = 2 * np.pi / self.snake_length
+        amplitude = 4  # Increased amplitude of the compression/expansion
+        frequency = 2 * np.pi / (self.snake_length / 2)
 
         # Sinusoidal modulation for alternating compression and expansion
+        X_snake = X
+        Y_snake = Y
         Z_snake = Z + amplitude * np.sin(frequency * (Z - snake_z))
 
-        return X, Y, Z_snake
+        return X_snake, Y_snake, Z_snake
 
     def sidewinding(self, t):
         theta = np.linspace(0, 2 * np.pi, 100)
