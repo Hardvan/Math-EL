@@ -88,8 +88,8 @@ create_video('sidewinding')
 1. **Install Dependencies**: Ensure all required libraries are installed.
 2. **Execute**: Run the script to generate videos for different types of snake motion.
 
-```bash
-python script_name.py
-```
+   ```bash
+   python script_name.py
+   ```
 
 3. **Output**: The generated videos will be saved as `snake_<motion_type>.mp4` in the script directory.
