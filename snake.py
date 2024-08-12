@@ -106,7 +106,7 @@ class SnakePipelineSimulator:
         plt.close()
 
     def create_video(self, motion_type, file_path):
-        fourcc = cv2.VideoWriter_fourcc(*'H264')
+        fourcc = cv2.VideoWriter_fourcc(*'avc1')
         output_path = f'{file_path}/{motion_type}.mp4'
         out = cv2.VideoWriter(output_path, fourcc, 10.0, (640, 480))
 
