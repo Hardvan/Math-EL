@@ -25,14 +25,15 @@ def index():
             n_frames, snake_length, pipeline_radius, pipeline_length, snake_radius, UPLOAD_FOLDER
         )
         print("✅  Videos generated successfully.")
-        print(f"Video paths: {video_paths}")
 
         # Prepare video file paths for rendering
-        videos = {motion: url_for('static', filename=os.path.basename(
-            path)) for motion, path in video_paths.items()}
-        print(f"Videos variable: {videos}")
+        # Prefix ../ to make the path relative to the root directory
+        video_paths = {motion: f"../{path}" for motion,
+                       path in video_paths.items()}
 
-        return render_template('videos.html', videos=videos)
+        print(f"Video paths: {video_paths}")
+
+        return render_template('videos.html', video_paths=video_paths)
 
     return render_template('index.html')
 
