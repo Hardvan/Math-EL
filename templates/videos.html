@@ -8,12 +8,13 @@
 
   <body>
     <h1>Generated Snake Videos</h1>
-    {% for motion, video_url in videos.items() %}
+    {% for motion, video_url in video_paths.items() %}
     <h2>{{ motion.capitalize() }}</h2>
     <video width="640" height="480" controls>
       <source src="{{ video_url }}" type="video/mp4" />
       Your browser does not support the video tag.
     </video>
+    <p>{{ video_url }}</p>
     <br /><br />
     {% endfor %}
     <a href="/">Generate More Videos</a>
