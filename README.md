@@ -13,6 +13,20 @@ This project visualizes different types of snake motion in a cylindrical pipelin
 
 - **Output**: MP4 videos showing the snake's movement in a cylindrical pipeline.
 
+## Screenshots
+
+![Website Intro](./screenshots/1.jpg)
+
+![Parameters Input Form](./screenshots/2.jpg)
+
+![Lateral Undulation](./screenshots/3.jpg)
+
+![Concertina](./screenshots/4.jpg)
+
+![Rectilinear](./screenshots/5.jpg)
+
+![Sidewinding](./screenshots/6.jpg)
+
 ## Requirements
 
 - Python 3.x
