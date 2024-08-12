@@ -3,6 +3,8 @@ import os
 from snake import create_video_request_handler
 
 app = Flask(__name__)
+
+
 UPLOAD_FOLDER = 'static/videos'
 os.makedirs(UPLOAD_FOLDER, exist_ok=True)
 
@@ -10,6 +12,7 @@ os.makedirs(UPLOAD_FOLDER, exist_ok=True)
 @app.route('/', methods=['GET', 'POST'])
 def index():
     if request.method == 'POST':
+        # Get form data
         n_frames = int(request.form['n_frames'])
         snake_length = float(request.form['snake_length'])
         pipeline_radius = float(request.form['pipeline_radius'])
@@ -17,13 +20,17 @@ def index():
         snake_radius = float(request.form['snake_radius'])
 
         # Generate videos
+        print("🎥  Generating videos...")
         video_paths = create_video_request_handler(
             n_frames, snake_length, pipeline_radius, pipeline_length, snake_radius, UPLOAD_FOLDER
         )
+        print("✅  Videos generated successfully.")
+        print(f"Video paths: {video_paths}")
 
         # Prepare video file paths for rendering
         videos = {motion: url_for('static', filename=os.path.basename(
             path)) for motion, path in video_paths.items()}
+        print(f"Videos variable: {videos}")
 
         return render_template('videos.html', videos=videos)
 
